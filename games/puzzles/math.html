@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Math Adventure Game</title>
+    <style>
+        body {
+            font-family: 'Comic Sans MS', cursive, sans-serif;
+            background-color: #f0f8ff;
+            text-align: center;
+            padding: 20px;
+        }
+        h1 {
+            color: #ff6347;
+        }
+        #timerDisplay {
+            font-size: 24px; /* Increase the font size */
+            font-weight: bold; /* Make the font bold */
+            color: #ff6f61; /* Change the text color */
+            padding: 10px; /* Add padding for better appearance */
+            background-color: #ffffff; /* White background for contrast */
+            border: 2px solid #ff6f61; /* Border to match the color theme */
+            border-radius: 8px; /* Rounded corners */
+            position: fixed; /* Fixed position to stay in the same place */
+            top: 20px; /* Distance from the top */
+            right: 20px; /* Distance from the right */
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /* Add a subtle shadow */
+            z-index: 1000; /* Ensure it stays above other elements */
+        }
+        #gameContainer {
+            background-color: #ffffff;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            margin: auto;
+            max-width: 400px;
+        }
+        #question {
+            font-size: 24px;
+            margin: 20px 0;
+        }
+        input[type="number"] {
+            padding: 10px;
+            font-size: 18px;
+            border: 2px solid #ff6347;
+            border-radius: 5px;
+            width: 100%;
+            box-sizing: border-box;
+        }
+        button {
+            background-color: #ff6347;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 18px;
+            margin-top: 10px;
+            transition: background-color 0.3s;
+        }
+        button:hover {
+            background-color: #e91e63;
+        }
+        #result {
+            font-size: 20px;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Math Adventure Game</h1>
+    <div id="timerDisplay"></div>
+    <div id="gameContainer">
+        <div id="question">What is 2 + 2?</div>
+        <input type="number" id="answer" placeholder="Your answer" />
+        <button id="submitBtn">Submit</button>
+        <div id="result"></div>
+        <button id="nextBtn" style="display:none;">Next Question</button>
+    </div>
+
+    <script>
+        let currentQuestionIndex = 0;
+        let score = 0;
+        const questions = [
+            { question: "What is 2 + 2?", answer: 4 },
+            { question: "What is 5 - 3?", answer: 2 },
+            { question: "What is 3 x 3?", answer: 9 },
+            { question: "What is 10 / 2?", answer: 5 },
+            { question: "What is 7 + 5?", answer: 12 },
+            { question: "What is 6 - 4?", answer: 2 },
+            { question: "What is 8 x 1?", answer: 8 },
+            { question: "What is 9 / 3?", answer: 3 }
+        ];
+
+        function loadQuestion() {
+            const currentQuestion = questions[currentQuestionIndex];
+            document.getElementById('question').innerText = currentQuestion.question;
+            document.getElementById('answer').value = ''; 
+            document.getElementById('result').innerText = '';
+            document.getElementById('nextBtn').style.display = 'none';
+        }
+
+        document.getElementById('submitBtn').addEventListener('click', function() {
+            const answer = parseInt(document.getElementById('answer').value);
+            const currentQuestion = questions[currentQuestionIndex];
+
+            if (answer === currentQuestion.answer) {
+                score++;
+                document.getElementById('result').innerText = "Correct!";
+            } else {
+                document.getElementById('result').innerText = "Wrong! The correct answer is " + currentQuestion.answer;
+            }
+
+            currentQuestionIndex++;
+            if (currentQuestionIndex < questions.length) {
+                document.getElementById('nextBtn').style.display = 'block';
+            } else {
+                clearInterval(timerInterval);
+                alert("You've completed the game! Your score is " + score + " out of " + questions.length);
+                document.getElementById('gameContainer').innerHTML = `<h2>Game Over! Your score is ${score} out of ${questions.length}!</h2><button onclick="restartGame()">Play Again</button>`;
+            }
+        });
+
+        document.getElementById('nextBtn').addEventListener('click', loadQuestion);
+
+        function restartGame() {
+            currentQuestionIndex = 0;
+            score = 0;
+            timerDuration = 5 * 60; // Reset timer to 5 minutes
+            localStorage.removeItem('remainingTime'); // Clear saved time
+            loadTimer(); // Load remaining time
+            startTimer(); // Start the timer
+            loadQuestion(); // Load the first question
+            document.getElementById('gameContainer').innerHTML = `
+                <div id="question">What is 2 + 2?</div>
+                <input type="number" id="answer" placeholder="Your answer" />
+                <button id="submitBtn">Submit</button>
+                <div id="result"></div>
+                <button id="nextBtn" style="display:none;">Next Question</button>
+            `;
+        }
+
+        window.onload =loadQuestion(); // Load the first question
+    </script>
+    <script src="../../timer.js"></script>
+</body>
+</html>

@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kids GK Quiz</title>
+    <style>
+        body {
+            font-family: 'Comic Sans MS', cursive, sans-serif;
+            background-color: #ffeb3b;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+        }
+        
+        #timerDisplay {
+            font-size: 24px;
+            font-weight: bold;
+            color: #ff6f61;
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            padding: 10px;
+            background-color: #ffffff;
+            border: 2px solid #ff6f61;
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            z-index: 1000;
+        }
+
+        .quiz-container {
+            background: #ffffff;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 0 25px rgba(0, 0, 0, 0.3);
+            width: 90vw; /* Adjust width to 90% of viewport width */
+            height: 90vh; /* Adjust height to 90% of viewport height */
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+        }
+
+        h1 {
+            color: #d32f2f;
+            font-size: 3em;
+            text-shadow: 2px 2px 2px rgba(0, 0, 0, 0.3);
+        }
+
+        button {
+            background-color: #4caf50;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1.2em;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+
+        #scoreBoard {
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="quiz-container">
+        <h1>Kids GK Quiz</h1>
+        <div id="timerDisplay"></div>
+        <div id="question"></div>
+        <div>
+            <button onclick="selectOption(0)" id="option0"></button>
+            <button onclick="selectOption(1)" id="option1"></button>
+            <button onclick="selectOption(2)" id="option2"></button>
+            <button onclick="selectOption(3)" id="option3"></button>
+        </div>
+        <br>
+        <button id="nextButton" style="display:none;" onclick="nextQuestion()">Next Question</button>
+        <div id="scoreBoard"></div>
+    </div>
+    <script src="quiz.js"></script>
+    <script src="../../timer.js"></script>
+</body>
+</html> 
