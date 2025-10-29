@@ -48,19 +48,6 @@ Option A — Open in browser:
 
 1. Double-click `index.html` (or open it with your browser). This works for most pages that don’t require a server.
 
-Option B — Run a local static server (recommended for consistent behavior):
-
-PowerShell example (from the `home` folder):
-
-```powershell
-# change to the project directory, then run a tiny HTTP server
-cd 'K:\Project Programs\BrainyQuest\home'
-python -m http.server 8000
-# Open http://localhost:8000 in your browser
-```
-
-If you don't have Python, you can use any static server (Node `http-server`, Live Server extension, etc.).
-
 ## Development notes
 
 - Files are plain HTML/CSS/JS; no build step required.
@@ -83,6 +70,7 @@ This project can be published under MIT License (or change as you prefer). Add a
 ## Contact
 
 If you need help or want to collaborate, include your preferred contact information here (email or GitHub handle).
+📧kubendra2004@gmail.com
 
 ---
 
